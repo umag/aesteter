@@ -42,13 +42,18 @@ batch_size = args.batch_size
 pipe = pipeline("image-classification", model=model_folder, device=0)
 # Define the paths for the input folder and output folders
 
-output_folder_hq = input_folder+"/output_hq_folder" 
-output_folder_lq = input_folder+"/output_lq_folder" 
+output_folder_hq = input_folder+"output_hq_folder" 
+if not os.path.exists(output_folder_hq):
+   # Create a new directory because it does not exist
+   os.makedirs(output_folder_hq)
+output_folder_lq = input_folder+"output_lq_folder" 
+if not os.path.exists(output_folder_lq):
+   # Create a new directory because it does not exist
+   os.makedirs(output_folder_lq)
 # List all image files in the input folder
 image_files = [os.path.join(input_folder, f) for f in os.listdir(input_folder) if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
 
-print(image_files)
-print(model_folder)
+
 # Process images in batches
 for i in range(0, len(image_files), batch_size):
     batch = image_files[i:i + batch_size]
