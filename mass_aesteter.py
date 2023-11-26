@@ -71,5 +71,6 @@ for i in range(0, len(image_files), batch_size):
 
         # Copy the image to the appropriate folder
         shutil.copy(batch[idx], os.path.join(destination_folder, os.path.basename(batch[idx])))
+        print(os.path.basename(batch[idx])+" score "+str(hq_score))
 
 print("Classification and sorting complete.")
